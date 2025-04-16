@@ -1,0 +1,44 @@
+{
+  "name": "git-gui",
+  "private": false,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri dev"
+  },
+  "dependencies": {
+    "vue": "^3.5.13",
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-opener": "^2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.3",
+    "vue-tsc": "^2.1.10",
+    "@tauri-apps/cli": "^2"
+  },
+  "description": "git gui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silky-tone/GitGui.git"
+  },
+  "keywords": [
+    "git",
+    "gui",
+    "git gui",
+    "tauri",
+    "vue",
+    "vue3",
+    "typescript"
+  ],
+  "author": "ReFunny <2048412928@qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/silky-tone/GitGui/issues"
+  },
+  "homepage": "https://github.com/silky-tone/GitGui#readme"
+}
