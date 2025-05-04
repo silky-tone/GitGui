@@ -8,10 +8,7 @@ export function createWindow(url: string, options: BrowserWindowConstructorOptio
     width: 800,
     height: 600,
     titleBarStyle: 'hidden',
-    titleBarOverlay: {
-      height: 35,
-      color: '#dddddd',
-    },
+    titleBarOverlay: { height: 40, color: '#dddddd' },
   } as BrowserWindowConstructorOptions, options, { show: false }));
 
   // TODO: 加载页面
