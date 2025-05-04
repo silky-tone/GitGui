@@ -1,26 +1,46 @@
-import { defineConfig } from 'vite';
+import { dirname, resolve } from 'node:path';
+import { defineConfig, loadEnv } from 'vite';
+import { fileURLToPath } from 'node:url';
 import vue from '@vitejs/plugin-vue';
 
-// @ts-expect-error process is a nodejs global
-const host = process.env.TAURI_DEV_HOST;
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// https://vitejs.dev/config/
-export default defineConfig(async () => ({
-  plugins: [vue()],
-
-  // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
-  //
-  // 1. prevent vite from obscuring rust errors
-  clearScreen: false,
-  // 2. tauri expects a fixed port, fail if that port is not available
-  server: {
-    port: 1420,
-    strictPort: true,
-    host: host || false,
-    hmr: host ? { protocol: 'ws', host, port: 1421 } : undefined,
-    watch: {
-      // 3. tell vite to ignore watching `src-tauri`
-      ignored: ['**/src-tauri/**'],
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd());
+  return {
+    plugins: [
+      vue(),
+    ],
+    base: './',
+    server: {
+      host: '0.0.0.0',
+      port: Number(env.VITE_PORT),
     },
-  },
-}));
+    build: {
+      rollupOptions: {
+        input: {
+          index: resolve(__dirname, 'index.html'),
+          launch: resolve(__dirname, 'launch.html'),
+        },
+        output: {
+          manualChunks: (id) => {
+            const manualName = (id.trim().split('node_modules/')[1] || '').trim().split('/')[0];
+            manualName && console.log(JSON.stringify({ manualName, id }));
+            if (manualName.includes('vue')) return 'vue';
+            if (manualName) {
+              return 'vendor';
+            }
+          },
+        },
+      },
+    },
+    resolve: {
+      alias: {
+        '@libs': resolve(__dirname, 'src/libs'),
+        '@utils': resolve(__dirname, 'src/utils'),
+        '@common': resolve(__dirname, 'src/common'),
+        '@components': resolve(__dirname, 'src/components'),
+      },
+    },
+  };
+});

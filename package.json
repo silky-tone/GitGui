@@ -1,41 +1,37 @@
 {
   "name": "git-gui",
   "private": false,
-  "version": "0.1.0",
-  "type": "module",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "main": "./dist/index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "dev": "concurrently \"vite\" \"vite build --watch --config electron.config.ts\" \"nodemon --watch dist/index.js --exec electron .\"",
+    "build": "vite build",
     "preview": "vite preview",
-    "tauri": "tauri dev"
+    "electron:dev": "electron ."
   },
   "dependencies": {
     "vue": "^3.5.13",
-    "@tauri-apps/api": "^2",
-    "@tauri-apps/plugin-opener": "^2"
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.1",
-    "typescript": "~5.6.2",
-    "vite": "^6.0.3",
-    "vue-tsc": "^2.1.10",
-    "@tauri-apps/cli": "^2"
+    "@types/node": "^22.15.3",
+    "@vitejs/plugin-vue": "^5.2.2",
+    "@vue/tsconfig": "^0.7.0",
+    "concurrently": "^9.1.2",
+    "electron": "^36.1.0",
+    "nodemon": "^3.1.10",
+    "sass": "^1.87.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.3.1",
+    "vue-tsc": "^2.2.8"
   },
-  "description": "git gui",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/silky-tone/GitGui.git"
   },
-  "keywords": [
-    "git",
-    "gui",
-    "git gui",
-    "tauri",
-    "vue",
-    "vue3",
-    "typescript"
-  ],
-  "author": "ReFunny <2048412928@qq.com>",
+  "keywords": ["git", "gui", "vue", "vite", "electron", "typescript", "sass"],
+  "author": "funny002<funnydsu@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/silky-tone/GitGui/issues"

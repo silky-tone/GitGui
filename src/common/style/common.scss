@@ -1,0 +1,26 @@
+:root {
+  --titleBar-height: env(titlebar-area-height, 35px);
+  --titleBar-width: calc(env(titlebar-area-width) - 1px);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  width: 100%;
+  line-height: 1;
+  min-height: 100vh;
+  overflow: hidden auto;
+}
+
+img {
+  display: inline-block;
+}
